@@ -33,3 +33,18 @@ This project:
 
 ---
 
+
+**Data model**
+- `complaints(id, external_id, source, name, phone, email, ip, timestamp, text, score, risk_band, explanation_json)`
+- `source_trust(id, source, trust)` — `0..1` (higher = more trusted ⇒ usually *lower* risk)
+
+---
+
+## How scoring works (explainable)
+
+Let:
+- `dup_signal = tanh(#recent phone/email/IP matches / 3)` (saturates after ~3)
+- `kw_hits` = count of risk keywords in text
+- `recency` = linear decay over 30 days (today = 1, 30d = 0)
+- `trust` = `[0..1]` from `source_trust` (default `0.5`)
+

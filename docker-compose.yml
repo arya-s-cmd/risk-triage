@@ -1,0 +1,16 @@
+services:
+  api:
+    build: ./backend
+    ports: ['8000:8000']
+    environment:
+      - DB_URL=sqlite:////data/risk.db
+    volumes:
+      - api_data:/data
+  web:
+    build: ./frontend
+    ports: ['5173:5173']
+    environment:
+      - VITE_API_BASE=http://localhost:8000
+    depends_on: [api]
+volumes:
+  api_data:

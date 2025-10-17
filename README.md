@@ -40,7 +40,7 @@ This project:
 
 ---
 
-## How scoring works (explainable)
+## How scoring works
 
 Let:
 - `dup_signal = tanh(#recent phone/email/IP matches / 3)` (saturates after ~3)
